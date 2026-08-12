@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": [
+    "Shared dependency-update policy for active fearandesire repositories.",
+    "GitHub branch protection remains the final merge gate."
+  ],
+  "extends": ["config:recommended"],
+  "timezone": "America/New_York",
+  "schedule": ["before 6am on Monday"],
+  "dependencyDashboard": true,
+  "rebaseWhen": "behind-base-branch",
+  "prConcurrentLimit": 5,
+  "platformAutomerge": true,
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Automerge non-major dependency updates after required checks pass",
+      "matchUpdateTypes": ["patch", "minor", "digest", "pin", "pinDigest", "lockFileMaintenance"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Automerge GitHub Actions updates after required checks pass",
+      "matchManagers": ["github-actions"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Require Dependency Dashboard approval for breaking updates",
+      "matchUpdateTypes": ["major", "replacement"],
+      "dependencyDashboardApproval": true,
+      "automerge": false
+    }
+  ]
+}
