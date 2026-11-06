@@ -1,35 +1,39 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
-    "Shared dependency-update policy for active fearandesire repositories.",
+    "Quiet dependency-update policy for active fearandesire repositories.",
+    "Pull requests open only for major updates and security fixes. Security fixes wait for approval on the Dependency Dashboard (same shape as the charyon org preset).",
     "GitHub branch protection remains the final merge gate."
   ],
   "extends": ["config:recommended"],
   "timezone": "America/New_York",
   "schedule": ["before 6am on Monday"],
   "dependencyDashboard": true,
+  "minimumReleaseAge": "3 days",
   "rebaseWhen": "behind-base-branch",
-  "prConcurrentLimit": 5,
-  "platformAutomerge": true,
-  "lockFileMaintenance": {
-    "enabled": true
+  "prConcurrentLimit": 3,
+  "automerge": false,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "dependencyDashboardApproval": true,
+    "labels": ["security"]
   },
   "packageRules": [
     {
-      "description": "Automerge non-major dependency updates after required checks pass",
-      "matchUpdateTypes": ["patch", "minor", "digest", "pin", "pinDigest", "lockFileMaintenance"],
-      "automerge": true,
-      "automergeType": "pr"
+      "description": "Minor, patch, digest, pin and lockfile updates stay off. Security fixes still open (after approval) because vulnerabilityAlerts overrides this rule.",
+      "matchPackageNames": ["*"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest", "bump", "lockFileMaintenance"],
+      "enabled": false
     },
     {
-      "description": "Automerge GitHub Actions updates after required checks pass",
-      "matchManagers": ["github-actions"],
-      "automerge": true,
-      "automergeType": "pr"
+      "description": "Major updates open as PRs and are never merged automatically",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["major"]
     },
     {
-      "description": "Require Dependency Dashboard approval for breaking updates",
-      "matchUpdateTypes": ["major", "replacement"],
+      "description": "Package replacements wait for approval on the Dependency Dashboard",
+      "matchUpdateTypes": ["replacement"],
       "dependencyDashboardApproval": true,
       "automerge": false
     }
