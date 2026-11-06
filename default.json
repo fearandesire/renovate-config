@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
     "Quiet dependency-update policy for active fearandesire repositories.",
-    "Pull requests open only for major updates and security fixes. Security fixes wait for approval on the Dependency Dashboard (same shape as the charyon org preset).",
+    "Pull requests open only for major updates and security fixes. Security fixes open as PRs straight away: Renovate cannot filter by severity, and a critical fix must never sit waiting for a dashboard tick.",
     "GitHub branch protection remains the final merge gate."
   ],
   "extends": ["config:recommended"],
@@ -15,7 +15,6 @@
   "automerge": false,
   "vulnerabilityAlerts": {
     "enabled": true,
-    "dependencyDashboardApproval": true,
     "labels": ["security"]
   },
   "packageRules": [
