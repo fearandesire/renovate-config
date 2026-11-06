@@ -14,11 +14,14 @@ Add this repository-level configuration on the default branch:
 }
 ```
 
-The preset schedules updates weekly, limits Renovate to five concurrent pull
-requests, rebases branches that fall behind, and uses GitHub native auto-merge.
-Patch, minor, digest, lockfile-maintenance, and GitHub Actions updates can merge
-only after repository protections and required checks pass. Major and
-replacement updates require approval through the Dependency Dashboard.
+The preset is deliberately quiet. Pull requests open only for **major** updates and for **security fixes**:
+
+- Minor, patch, digest, pin and lockfile-maintenance updates are off.
+- Major updates open as PRs (at most three at a time, Monday mornings) and are never auto-merged.
+- Security fixes are labelled `security` and wait for approval on the Dependency Dashboard, so they cost one tick instead of a PR you did not ask for. Renovate cannot filter them by severity.
+- Replacement updates wait for approval on the Dependency Dashboard.
+
+This matches the `charyon` org preset (`renovate/default.json` in `charyon/repository-kit`).
 
 Repository configuration can add narrow overrides. Do not weaken required
 checks or introduce tokens, credentials, or host rules into this public preset.
