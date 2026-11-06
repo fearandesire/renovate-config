@@ -19,7 +19,7 @@
   },
   "packageRules": [
     {
-      "description": "Minor, patch, digest, pin and lockfile updates stay off. Security fixes still open (after approval) because vulnerabilityAlerts overrides this rule.",
+      "description": "Minor, patch, digest, pin and lockfile updates stay off. Security fixes still open immediately because vulnerabilityAlerts overrides this rule.",
       "matchPackageNames": ["*"],
       "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest", "bump", "lockFileMaintenance"],
       "enabled": false
