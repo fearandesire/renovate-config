@@ -18,7 +18,7 @@ The preset is deliberately quiet. Pull requests open only for **major** updates 
 
 - Minor, patch, digest, pin and lockfile-maintenance updates are off.
 - Major updates open as PRs (at most three at a time, Monday mornings) and are never auto-merged.
-- Security fixes are labelled `security` and wait for approval on the Dependency Dashboard, so they cost one tick instead of a PR you did not ask for. Renovate cannot filter them by severity.
+- Security fixes are labelled `security` and open as PRs immediately, so a critical fix is never hidden behind a dashboard tick. Renovate cannot filter them by severity, so low-severity advisories also open a PR.
 - Replacement updates wait for approval on the Dependency Dashboard.
 
 This matches the `charyon` org preset (`renovate/default.json` in `charyon/repository-kit`).
